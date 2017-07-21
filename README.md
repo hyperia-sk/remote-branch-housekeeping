@@ -1,6 +1,6 @@
 ## GIT Remote Branch Housekeeping
 
-> `git remote-branch-hosekeeping` is a simple and efficient way to delete remote branches from git repository.
+> `git remote-branch-hosekeeping` is a simple and efficient way to delete remote merged branches from git repository.
 
 ## Screenshots
 
