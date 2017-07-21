@@ -1,4 +1,3 @@
-
 ## GIT Remote Branch Housekeeping
 
 > `git remote-branch-hosekeeping` is a simple and efficient way to delete remote branches from git repository.
@@ -15,7 +14,22 @@ git remote-branch-hosekeeping
 remote-branch-hosekeeping
 ```
 
-@tbc
+#### Parameters
+```
+remote-branch-housekeeping [ -f | -r | -d | -b ]
+
+-d <number>, --days <number>
+Defines days, default 14.
+
+-b <master>, --branch <master>
+Branch name, default "master".
+
+-r <origin>, --remote <origin>
+Remote name, default "origin".
+
+-f, --force
+Don't ask for confirm to delete branches.
+```
 
 ## Installation
 
@@ -40,11 +54,11 @@ sudo make reinstall
 
 #### OS X (homebrew)
 
-@tbc
+@todo
 
 #### Windows (cygwin)
 
-@tbc
+@todo
 
 
 ## System requirements
