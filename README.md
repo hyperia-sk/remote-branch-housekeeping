@@ -1,6 +1,6 @@
 ## GIT Remote Branch Housekeeping
 
-> `git remote-branch-hosekeeping` is a simple and efficient way to delete remote merged branches from git repository.
+> `git remote-branch-housekeeping` is a simple and efficient way to delete remote merged branches from git repository.
 
 ## Screenshots
 
@@ -9,9 +9,9 @@
 ## Usage
 
 ```bash
-git remote-branch-hosekeeping
+git remote-branch-housekeeping
 # or 
-remote-branch-hosekeeping
+remote-branch-housekeeping
 ```
 
 #### Parameters
@@ -36,7 +36,7 @@ Don't ask for confirm to delete branches.
 #### Unix like OS
 
 ```bash
-git clone https://github.com/hyperia-sk/remote-branch-hosekeeping.git && cd remote-branch-hosekeeping
+git clone https://github.com/hyperia-sk/remote-branch-housekeeping.git && cd remote-branch-housekeeping
 sudo make install
 ```
 
@@ -106,6 +106,6 @@ make test
 ## Licensing
 MIT see [LICENSE][] for the full license text.
 
-   [read this page]: https://github.com/hyperia-sk/remote-branch-hosekeeping/blob/master/CONTRIBUTING.md
-   [landing page]: https://github.com/hyperia-sk/remote-branch-hosekeeping
-   [LICENSE]: https://github.com/hyperia-sk/remote-branch-hosekeeping/blob/master/LICENSE.txt
+   [read this page]: https://github.com/hyperia-sk/remote-branch-housekeeping/blob/master/CONTRIBUTING.md
+   [landing page]: https://github.com/hyperia-sk/remote-branch-housekeeping
+   [LICENSE]: https://github.com/hyperia-sk/remote-branch-housekeeping/blob/master/LICENSE.txt
