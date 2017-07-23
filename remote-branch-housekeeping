@@ -3,11 +3,11 @@
 set -o nounset
 set -o errexit
 
-NORMAL=`echo "\033[m"`
-BOLD=`echo "\033[1m"`
-YELLOW=`echo "\033[33m"`
-GREEN=`echo "\033[32m"`
-FGRED=`echo "\033[41m"`
+NORMAL=$(echo "\033[m")
+BOLD=$(echo "\033[1m")
+YELLOW=$(echo "\033[33m")
+GREEN=$(echo "\033[32m")
+FGRED=$(echo "\033[41m")
 
 
 function printSubject
@@ -30,18 +30,18 @@ function printConditions
 
 function checkUpstream
 {
-    git fetch --quiet --prune $REMOTE_REPO
+    git fetch --quiet --prune "$REMOTE_REPO"
 
     UPSTREAM=${1:-'@{u}'}
     LOCAL=$(git rev-parse @)
     REMOTE=$(git rev-parse "$UPSTREAM")
     BASE=$(git merge-base @ "$UPSTREAM")
 
-    if [ $LOCAL = $REMOTE ]; then
+    if [ "$LOCAL" = "$REMOTE" ]; then
         echo "up to date"
-    elif [ $LOCAL = $BASE ]; then
+    elif [ "$LOCAL" = "$BASE" ]; then
         echo "need to pull"
-    elif [ $REMOTE = $BASE ]; then
+    elif [ "$REMOTE" = "$BASE" ]; then
         echo "need to push"
     else
         echo "diverged"
@@ -58,8 +58,8 @@ function printCheckGitRepo
 function deleteRemoteBranches
 {
     BRANCHES=$(
-        for k in `git branch -r --merged "$BRANCH" | perl -pe 's/^..(.*?)( ->.*)?$/\1/'`; do 
-            echo -e `git log -1 --pretty=format:"%Cgreen%ci %Creset" --after="$DATE" $k -- | head -n 1`$k; 
+        for k in $(git branch -r --merged "$BRANCH" | perl -pe 's/^..(.*?)( ->.*)?$/\1/'); do 
+            echo -e "$(git log -1 --pretty=format:"%Cgreen%ci %Creset" --after="$DATE" "$k" -- | head -n 1)$k"; 
         done | sort -r | grep "^$REMOTE_REPO" | sed "s/ *$REMOTE_REPO\///"
     )
     if [ "$BRANCHES" != "" ]; then
@@ -67,15 +67,16 @@ function deleteRemoteBranches
         echo -e ""
 
         if [ "$1" -eq "0" ]; then
-            declare -i NUMBER_OF_BRANCHES=$(echo $BRANCHES | grep -o ' ' | wc -l)+1
+            declare -i NUMBER_OF_BRANCHES
+            NUMBER_OF_BRANCHES=$(echo $BRANCHES | grep -o ' ' | wc -l)+1
             echo -e "${FGRED}Are you sure you want to delete these ${BOLD}${NUMBER_OF_BRANCHES}${NORMAL}${FGRED} branches${NORMAL} [y/n]: "
-            read 
+            read -r
         else 
             REPLY="y"
         fi
 
         if [ "$REPLY" == "y" ]; then
-            echo $BRANCHES | xargs git push $REMOTE_REPO --delete --quiet
+            echo "$BRANCHES" | xargs git push "$REMOTE_REPO" --delete --quiet
             echo -e "branches are removed"
 	else
 	    echo -e ""
@@ -149,9 +150,9 @@ done
 
 date --version > /dev/null 2>&1
 if [ $? == 0 ]; then
-    DATE=`date +%Y-%m-%d -d "-${DAYS}days"`
+    DATE="$(date +%Y-%m-%d -d "-${DAYS}days")"
 else
-    DATE=`date -v-${DAYS}d +%Y-%m-%d`
+    DATE="$(date -v-${DAYS}d +%Y-%m-%d)"
 fi
 
 printTitle
@@ -161,11 +162,12 @@ printSubject "Conditions"
 printConditions
 
 printSubject "Fetching branches..."
-checkUpstream
+checkUpstream "$@"
 
 printSubject "Deleting branches..."
 deleteRemoteBranches $FORCE
 
 printDone
 exit 0
+
 
