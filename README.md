@@ -1,8 +1,8 @@
 ## GIT Remote Branch Housekeeping
 
-> `git remote-branch-housekeeping` is a simple and efficient way to delete remote merged branches from git repository.
+[![Build Status](https://travis-ci.org/hyperia-sk/remote-branch-housekeeping.svg?branch=master)](https://travis-ci.org/hyperia-sk/remote-branch-housekeeping)
 
-## Screenshots
+> `git remote-branch-housekeeping` is a simple and efficient way to delete remote merged branches from git repository.
 
 ![screenshot](https://user-images.githubusercontent.com/6382002/28468955-f327d632-6e34-11e7-8848-753c94dbc644.png)
 
