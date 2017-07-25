@@ -108,4 +108,4 @@ MIT see [LICENSE][] for the full license text.
 
    [read this page]: https://github.com/hyperia-sk/remote-branch-housekeeping/blob/master/CONTRIBUTING.md
    [landing page]: https://github.com/hyperia-sk/remote-branch-housekeeping
-   [LICENSE]: https://github.com/hyperia-sk/remote-branch-housekeeping/blob/master/LICENSE.txt
+   [LICENSE]: https://github.com/hyperia-sk/remote-branch-housekeeping/blob/master/LICENSE
