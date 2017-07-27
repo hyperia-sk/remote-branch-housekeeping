@@ -23,7 +23,12 @@ function printDone
 
 function printConditions
 {
-    echo -e "- branch fully merged into ${REMOTE_REPO} ${BRANCH}"
+    if [ "$MERGE" = "--merged" ]; then
+        echo -e "- branch fully merged into ${REMOTE_REPO} ${BRANCH}"
+    else 
+        echo -e "- branch that are not merged into ${REMOTE_REPO} ${BRANCH}"
+    fi
+
     echo -e "- commits older then $DAYS days (after ${DATE})"
     printDone
 }
@@ -58,7 +63,7 @@ function printCheckGitRepo
 function deleteRemoteBranches
 {
     BRANCHES=$(
-        for k in $(git branch -r --merged "$BRANCH" | perl -pe 's/^..(.*?)( ->.*)?$/\1/'); do 
+        for k in $(git branch -r "$MERGE" "$BRANCH" | perl -pe 's/^..(.*?)( ->.*)?$/\1/'); do 
             echo -e "$(git log -1 --pretty=format:"%Cgreen%ci %Creset" --after="$DATE" "$k" -- | head -n 1)$k"; 
         done | sort -r | grep "^$REMOTE_REPO" | sed "s/ *$REMOTE_REPO\///"
     )
@@ -69,7 +74,7 @@ function deleteRemoteBranches
         if [ "$1" -eq "0" ]; then
             declare -i NUMBER_OF_BRANCHES
             NUMBER_OF_BRANCHES=$(echo $BRANCHES | grep -o ' ' | wc -l)+1
-            echo -e "${FGRED}Are you sure you want to delete these ${BOLD}${NUMBER_OF_BRANCHES}${NORMAL}${FGRED} branches${NORMAL} [y/n]: "
+            echo -e "${FGRED}Are you sure you want to delete these ${BOLD}${NUMBER_OF_BRANCHES}${NORMAL}${FGRED} branches?${NORMAL} [y/n]: "
             read -r
         else 
             REPLY="y"
@@ -108,6 +113,9 @@ Branch name, default \"master\".
 -r <origin>, --remote <origin>
 Remote name, default \"origin\".
 
+-n, --no-merged
+Delete only branches that are not merged.
+
 -f, --force
 Don't ask for confirm to delete branches.
 "
@@ -117,11 +125,16 @@ FORCE=0
 DAYS=14
 BRANCH="master"
 REMOTE_REPO="origin"
+MERGE="--merged"
 while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
         -f|--force)
             FORCE=1
+        ;;
+
+        -n|--no-merged)
+            MERGE="--no-merged"
         ;;
 
         -r|--remote)
@@ -169,5 +182,3 @@ deleteRemoteBranches $FORCE
 
 printDone
 exit 0
-
-
