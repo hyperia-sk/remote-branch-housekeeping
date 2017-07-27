@@ -27,6 +27,9 @@ Branch name, default "master".
 -r <origin>, --remote <origin>
 Remote name, default "origin".
 
+-n, --no-merged
+Delete only branches that are not merged.
+
 -f, --force
 Don't ask for confirm to delete branches.
 ```
