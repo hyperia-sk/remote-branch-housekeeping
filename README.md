@@ -36,14 +36,19 @@ Don't ask for confirm to delete branches.
 
 ## Installation
 
+```bash
+git clone https://github.com/hyperia-sk/remote-branch-housekeeping.git && cd remote-branch-housekeeping
+```
+
+Open up the cloned directory and run:
+
 #### Unix like OS
 
 ```bash
-git clone https://github.com/hyperia-sk/remote-branch-housekeeping.git && cd remote-branch-housekeeping
 sudo make install
 ```
 
-For uninstalling, open up the cloned directory and run
+For uninstalling
 
 ```bash
 sudo make uninstall
@@ -61,7 +66,15 @@ sudo make reinstall
 
 #### Windows (cygwin)
 
-@todo
+```bash
+C:\cygwin\bin\bash installer.sh
+```
+
+For uninstalling
+
+```bash
+C:\cygwin\bin\bash uninstaller.sh
+```
 
 
 ## System requirements
