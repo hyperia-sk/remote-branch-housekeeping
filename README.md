@@ -16,7 +16,7 @@ remote-branch-housekeeping
 
 #### Parameters
 ```
-remote-branch-housekeeping [ -f | -r | -d | -b ]
+remote-branch-housekeeping [ -f | -r | -d | -b | -n ]
 
 -d <number>, --days <number>
 Defines days, default 14.
