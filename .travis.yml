@@ -1,10 +1,8 @@
 language: bash
 
 install:
-  - git clone https://github.com/$TRAVIS_REPO_SLUG.git $TRAVIS_REPO_SLUG
-  - cd $TRAVIS_REPO_SLUG
-  - git checkout -qf $TRAVIS_COMMIT
-  - git pull origin master
-  - git checkout master
+  - git checkout -b ${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+  - git branch --set-upstream-to origin/$TRAVIS_BRANCH
+  - git rev-parse HEAD
 
 script: make test
