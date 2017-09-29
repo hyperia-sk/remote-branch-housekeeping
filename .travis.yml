@@ -30,5 +30,5 @@ after_success: |
   cd ../.. &&
   rm -rf kcov-master &&
   mkdir -p coverage &&
-  kcov coverage script.sh &&
+  kcov coverage remote-branch-housekeeping &&
   bash <(curl -s https://codecov.io/bash)
