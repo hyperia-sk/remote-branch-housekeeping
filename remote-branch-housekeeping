@@ -7,6 +7,7 @@ NORMAL=$(echo "\033[m")
 BOLD=$(echo "\033[1m")
 YELLOW=$(echo "\033[33m")
 GREEN=$(echo "\033[32m")
+BLUE=$(echo "\033[36m")
 FGRED=$(echo "\033[41m")
 
 
@@ -94,9 +95,13 @@ function deleteRemoteBranches
 
 function printTitle
 {
-    echo -e ""
-    printSubject "Git Remote Branch Housekeeping"
-    echo -e ""
+    echo -e "${BLUE}  _   _                      ${YELLOW}_${NORMAL}"
+    echo -e "${BLUE} | | | |_   _ _ __   ___ _ _${YELLOW}(_)${NORMAL}${BLUE} __ _ ${NORMAL}"
+    echo -e "${BLUE} | |_| | | | | '_ \ / _ \ '_${YELLOW}| |${NORMAL}${BLUE}/ _' |${NORMAL}"
+    echo -e "${BLUE} |  _  | |_| | |_) |  __/ | ${YELLOW}| |${NORMAL}${BLUE} (_| |${NORMAL}"
+    echo -e "${BLUE} |_| |_|\__, | .__/ \___|_| ${YELLOW}|_|${NORMAL}${BLUE}\__,_|${NORMAL}"
+    echo -e "${BLUE}        |___/|_|  ${NORMAL}${BOLD}Branch Housekeeping${NORMAL}"
+    echo ""
 }
 
 function printHelp
@@ -118,6 +123,9 @@ Delete only branches that are not merged.
 
 -f, --force
 Don't ask for confirm to delete branches.
+
+-a, --no-ansi
+Disable ANSI output.
 "
 }
 
@@ -126,6 +134,7 @@ DAYS=14
 BRANCH="master"
 REMOTE_REPO="origin"
 MERGE="--merged"
+ANSI=1
 while [[ $# -gt 0 ]]; do
     key="$1"
     case "$key" in
@@ -152,6 +161,10 @@ while [[ $# -gt 0 ]]; do
             DAYS="$1"
         ;;
 
+        -a|--no-ansi)
+            ANSI=0
+        ;;
+
         *)
             printTitle
             printHelp
@@ -160,6 +173,15 @@ while [[ $# -gt 0 ]]; do
     esac
     shift
 done
+
+if [ "$ANSI" -eq "0" ]; then
+    NORMAL=""
+    BOLD=""
+    YELLOW=""
+    GREEN=""
+    BLUE=""
+    FGRED=""
+fi
 
 date --version > /dev/null 2>&1
 if [ $? == 0 ]; then
